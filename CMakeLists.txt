@@ -137,7 +137,7 @@ if (BUILD_TESTING)
                 Advapi32
         )
         include(GoogleTest)
-        gtest_discover_tests(backup_tests)
+        gtest_add_tests(TARGET backup_tests)
 
         add_executable(real_backend_smoke
             tests/real_backend_smoke.cpp
@@ -155,7 +155,7 @@ if (BUILD_TESTING)
                 bcrypt
                 Advapi32
         )
-        gtest_discover_tests(real_backend_smoke)
+        gtest_add_tests(TARGET real_backend_smoke)
 
         add_executable(gui_signal_smoke
             tests/gui_signal_smoke.cpp
@@ -170,6 +170,6 @@ if (BUILD_TESTING)
                 bcrypt
                 Advapi32
         )
-        gtest_discover_tests(gui_signal_smoke)
+        gtest_add_tests(TARGET gui_signal_smoke)
     endif()
 endif()

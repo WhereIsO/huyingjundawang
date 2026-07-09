@@ -2,14 +2,15 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "vs2019-x64",
-            "displayName": "VS 2019 x64",
+            "name": "ninja-msvc-release",
+            "displayName": "Ninja + MSVC Release",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/../b_build",
+            "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_PREFIX_PATH": "$env{QT_PREFIX}",
-                "CMAKE_CXX_COMPILER": "cl"
+                "CMAKE_CXX_COMPILER": "cl",
+                "BACKUP_ALLOW_GTEST_DOWNLOAD": "ON"
             }
         }
     ]

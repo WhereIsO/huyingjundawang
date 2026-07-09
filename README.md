@@ -82,6 +82,24 @@ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$en
 
 程序使用真实备份后端，不需要额外启动脚本。
 
+## 自动化构建与分发
+
+仓库提供 GitHub Actions workflow：
+
+- 普通 push / PR：自动在 Windows 上构建、测试并上传 `BackupTool-windows-x64` artifact。
+- 推送 `v*` 标签：自动创建或更新 GitHub Release，并上传 Windows x64 zip 包。
+
+本地和 CI 使用同一个打包脚本：
+
+```powershell
+.\scripts\package_windows.ps1 -BuildDir build -Config Release
+```
+
+详细说明见：
+
+- `docs/github_actions_usage.md`
+- `docs/acceptance_matrix.md`
+
 ## 说明
 
 本仓库已整理为单一主线工程，不再保留旧的多版本堆叠目录。历史版本差异可通过 Git 提交记录查看。
