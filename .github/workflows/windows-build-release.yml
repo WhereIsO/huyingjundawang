@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build-test-package:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     env:
       QT_VERSION: "6.5.3"
@@ -41,28 +41,34 @@ jobs:
           "QT_PREFIX=$qtPrefix" >> $env:GITHUB_ENV
           "$qtPrefix\bin" >> $env:GITHUB_PATH
 
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
       - name: Configure
         shell: pwsh
         run: |
           cmake -S . -B $env:BUILD_DIR `
-            -G "Visual Studio 17 2022" -A x64 `
+            -G Ninja `
+            -DCMAKE_BUILD_TYPE=Release `
             -DCMAKE_PREFIX_PATH="$env:QT_PREFIX" `
+            -DCMAKE_CXX_COMPILER=cl `
             -DBACKUP_ALLOW_GTEST_DOWNLOAD=ON
 
       - name: Build
         shell: pwsh
-        run: cmake --build $env:BUILD_DIR --config Release --parallel
+        run: cmake --build $env:BUILD_DIR --parallel
 
       - name: Test
         shell: pwsh
-        run: ctest --test-dir $env:BUILD_DIR -C Release --output-on-failure
+        run: ctest --test-dir $env:BUILD_DIR --output-on-failure
 
       - name: Package
         shell: pwsh
         run: |
           .\scripts\package_windows.ps1 `
             -BuildDir $env:BUILD_DIR `
-            -Config Release `
             -PackageDir "$env:BUILD_DIR\package\$env:PACKAGE_NAME" `
             -ZipPath "$env:BUILD_DIR\$env:PACKAGE_NAME.zip"
 
