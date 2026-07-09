@@ -16,23 +16,100 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QHBoxLayout>
+#include <QPainter>
+#include <QPaintEvent>
 
 namespace pbackup::ui {
+namespace {
+
+bool realBackendRequested() {
+    return qgetenv("BACKUP_BACKEND_MODE").toLower() == "real";
+}
+
+QString backendModeText() {
+    return realBackendRequested() ? QStringLiteral("真实后端") : QStringLiteral("演示后端");
+}
+
+class HeaderPanel : public QWidget {
+public:
+    explicit HeaderPanel(QWidget* parent = nullptr) : QWidget(parent) {
+        setMinimumHeight(86);
+        auto* layout = new QHBoxLayout(this);
+        layout->setContentsMargins(22, 14, 22, 14);
+        layout->setSpacing(14);
+
+        auto* textCol = new QVBoxLayout();
+        textCol->setSpacing(4);
+
+        auto* title = new QLabel(QStringLiteral("数据备份工具"), this);
+        title->setFont(Theme::titleFont());
+        title->setStyleSheet(QStringLiteral("color:%1;").arg(Theme::textColor()));
+
+        auto* subtitle = new QLabel(QStringLiteral("备份  筛选  还原"), this);
+        subtitle->setFont(Theme::appFont());
+        subtitle->setStyleSheet(QStringLiteral("color:%1;").arg(Theme::mutedTextColor()));
+
+        textCol->addWidget(title);
+        textCol->addWidget(subtitle);
+        layout->addLayout(textCol, 1);
+
+        auto* badge = new QLabel(backendModeText(), this);
+        badge->setFont(Theme::appFont());
+        badge->setAlignment(Qt::AlignCenter);
+        badge->setMinimumWidth(96);
+        badge->setStyleSheet(QStringLiteral(
+            "QLabel{background:%1;color:#FFFFFF;padding:7px 14px;border:0;}")
+            .arg(realBackendRequested() ? Theme::successColor() : Theme::accentColor()));
+        layout->addWidget(badge, 0, Qt::AlignRight | Qt::AlignVCenter);
+    }
+
+protected:
+    void paintEvent(QPaintEvent* event) override {
+        QWidget::paintEvent(event);
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.fillRect(rect(), QColor(Theme::surfaceAltColor()));
+
+        painter.fillRect(QRect(0, 0, 8, height()), QColor(Theme::primaryColor()));
+        painter.setPen(QPen(QColor("#DDE7EA"), 1));
+        for (int x = width() - 260; x < width() + 80; x += 18) {
+            painter.drawLine(QPoint(x, 0), QPoint(x - 70, height()));
+        }
+
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(QColor("#EAF1F3"));
+        for (int y = 14; y < height(); y += 18) {
+            painter.drawRect(QRect(width() - 180, y, 8, 8));
+            painter.drawRect(QRect(width() - 132, y + 8, 8, 8));
+        }
+    }
+};
+
+} // namespace
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     setWindowTitle(QStringLiteral("数据备份工具"));
     // 初始尺寸收紧，保证在 1080p（含缩放）的可用工作区内完整可见；
     // 筛选页已内置滚动区，窗口再小也能滚动查看，不会被裁切。
-    resize(940, 600);
-    setMinimumSize(720, 480);
+    resize(1080, 680);
+    setMinimumSize(860, 560);
 
     // 让 Progress 结构体能跨线程随信号传递
     qRegisterMetaType<Progress>("Progress");
 
     auto* central = new QWidget(this);
+    central->setObjectName(QStringLiteral("AppCentral"));
+    central->setStyleSheet(Theme::styleSheet());
     auto* root = new QVBoxLayout(central);
     root->setContentsMargins(16, 16, 16, 16);
     root->setSpacing(Theme::sectionSpacing());
+
+    // ---- 后端 ----
+    m_backend = createBackend(this);
+
+    auto* header = new HeaderPanel(central);
+    root->addWidget(header);
 
     // ---- 顶部标签页 ----
     m_tabs = new QTabWidget(central);
@@ -91,8 +168,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     root->addWidget(splitter);
     setCentralWidget(central);
 
-    // ---- 后端 ----
-    m_backend = createBackend(this);
     wireBackend();
 
     connect(m_backup,  &BackupTab::startRequested,  this, &MainWindow::onBackupStart);
@@ -100,8 +175,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     connect(m_restore, &RestoreTab::startRequested, this, &MainWindow::onRestoreStart);
     connect(m_restore, &RestoreTab::cancelRequested,this, &MainWindow::onCancel);
 
-    m_log->appendInfo(QStringLiteral("界面已就绪。当前为演示后端（Mock），可独立运行、录制。"));
-    m_log->appendInfo(QStringLiteral("接入真实后端后，设置环境变量 BACKUP_BACKEND_MODE=real 即可切换。"));
+    if (realBackendRequested()) {
+        m_log->appendSuccess(QStringLiteral("界面已就绪。当前为真实后端，将执行实际备份与还原。"));
+    } else {
+        m_log->appendInfo(QStringLiteral("界面已就绪。当前为演示后端（Mock），不会改动真实文件。"));
+    }
 }
 
 void MainWindow::wireBackend() {

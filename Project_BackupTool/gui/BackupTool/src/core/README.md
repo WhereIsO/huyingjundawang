@@ -39,15 +39,13 @@
 
 ## 测试
 
-`backup_tests` 使用 GoogleTest，覆盖哈夫曼、加密、筛选、归档、备份还原、扫描、元数据和进度回调。当前 core 测试数为 40 个；连同真实后端和 GUI 信号 smoke test，CTest 总计 43 个。
+`backup_tests` 使用 GoogleTest，覆盖哈夫曼、加密、筛选、归档、备份还原、扫描、元数据、路径穿越防护和进度回调。当前 core 测试数为 41 个；连同真实后端和 GUI 信号 smoke test，CTest 总计 44 个。
 
 推荐构建命令：
 
 ```bat
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-cmake -S G:\_src_backup_tool_gui -B G:\_build_backup_tool_gui_ascii -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=G:\Anaconda3\Library -DCMAKE_CXX_COMPILER=cl
-cmake --build G:\_build_backup_tool_gui_ascii
-ctest --test-dir G:\_build_backup_tool_gui_ascii --output-on-failure
+cd gui\BackupTool
+build_msvc.bat
 ```
 
-注意：Qt AUTOMOC 在当前课程中文路径下会生成乱码 include 路径。若遇到 moc 找不到头文件的问题，请将 `gui/BackupTool` 复制到短 ASCII 路径后构建。
+注意：Qt AUTOMOC 在中文路径下可能生成乱码 include 路径。`build_msvc.bat` 默认会镜像到 `%TEMP%\BackupTool_src` 后构建。CMake 默认不联网下载 GoogleTest；需要自动下载时设置 `BACKUP_ALLOW_GTEST_DOWNLOAD=ON`。

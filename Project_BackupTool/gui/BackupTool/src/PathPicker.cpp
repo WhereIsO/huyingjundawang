@@ -27,6 +27,7 @@ PathPicker::PathPicker(const QString& label, Kind kind, QWidget* parent)
     connect(m_edit, &QLineEdit::textChanged, this, &PathPicker::onTextEdited);
 
     m_btn = new QPushButton(QStringLiteral("浏览…"), this);
+    m_btn->setObjectName(QStringLiteral("BrowseButton"));
     m_btn->setMinimumSize(80, Theme::lineEditSize().height());
     m_btn->setFont(Theme::appFont());
     connect(m_btn, &QPushButton::clicked, this, &PathPicker::onBrowse);

@@ -26,10 +26,14 @@ private:
     // 名称
     QLineEdit* m_nameGlob    = nullptr;
     // 类型（复选）
+    QCheckBox* m_useTypeFilter = nullptr;
     QCheckBox* m_typeFile     = nullptr;
     QCheckBox* m_typeDir      = nullptr;
+    QCheckBox* m_typeEmptyDir = nullptr;
     QCheckBox* m_typeSymlink  = nullptr;
     QCheckBox* m_typeHardlink = nullptr;
+    QCheckBox* m_typeJunction = nullptr;
+    QCheckBox* m_typeReparse  = nullptr;
     // 大小
     QLineEdit* m_sizeMin     = nullptr;
     QLineEdit* m_sizeMax     = nullptr;

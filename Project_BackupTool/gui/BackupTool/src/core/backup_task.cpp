@@ -83,14 +83,27 @@ void writeFileBytes(const std::filesystem::path& path,
     if (!out) throw BackupError(ErrorCode::IOError, "写入文件失败：" + pathToUtf8(path));
 }
 
+std::filesystem::path checkedRelativePath(const FileEntry& entry) {
+    const std::filesystem::path rel = pathFromUtf8(entry.relPath);
+    if (rel.empty() || rel.is_absolute() || rel.has_root_name() || rel.has_root_directory()) {
+        throw BackupError(ErrorCode::PkgCorrupted, "备份包包含非法路径：" + entry.relPath);
+    }
+    for (const auto& part : rel) {
+        if (part == std::filesystem::path("..")) {
+            throw BackupError(ErrorCode::PkgCorrupted, "备份包路径越界：" + entry.relPath);
+        }
+    }
+    return rel.lexically_normal();
+}
+
 std::filesystem::path sourcePathFor(const std::filesystem::path& root,
                                     const FileEntry& entry) {
-    return root / pathFromUtf8(entry.relPath);
+    return root / checkedRelativePath(entry);
 }
 
 std::filesystem::path destPathFor(const std::filesystem::path& root,
                                   const FileEntry& entry) {
-    return root / pathFromUtf8(entry.relPath);
+    return root / checkedRelativePath(entry);
 }
 
 std::vector<ArchiveRecord> recordsFromEntries(const std::filesystem::path& root,

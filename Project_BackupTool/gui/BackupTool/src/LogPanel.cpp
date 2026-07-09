@@ -9,12 +9,10 @@
 namespace pbackup::ui {
 
 LogPanel::LogPanel(QWidget* parent) : QPlainTextEdit(parent) {
+    setObjectName(QStringLiteral("LogPanel"));
     setReadOnly(true);
     setMaximumBlockCount(5000);  // 防止日志无限增长
     setFont(Theme::logFont());
-    setStyleSheet(QStringLiteral(
-        "QPlainTextEdit { background:#FFFFFF; border:1px solid %1; }"
-    ).arg(Theme::borderColor()));
     setMinimumHeight(200);
 }
 
@@ -32,10 +30,10 @@ QString LogPanel::levelTag(Level lvl) const {
 
 QString LogPanel::levelColor(Level lvl) const {
     switch (lvl) {
-    case Info:    return QStringLiteral("#1565C0");
-    case Warn:    return QStringLiteral("#FF6F00");
-    case Error:   return QStringLiteral("#C62828");
-    case Success: return QStringLiteral("#2E7D32");
+    case Info:    return QStringLiteral("#7DD3FC");
+    case Warn:    return QStringLiteral("#FBBF24");
+    case Error:   return QStringLiteral("#FCA5A5");
+    case Success: return QStringLiteral("#86EFAC");
     }
     return Theme::textColor();
 }

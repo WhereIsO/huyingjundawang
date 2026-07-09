@@ -104,41 +104,42 @@ cmake --build build
    ```
 
 3. **避免超长 / 含中文的构建路径。**
-   MinGW 工具链在含中文的路径下会报 `Illegal byte sequence`；MSVC 对象文件路径过长（>250 字符）也会告警。建议把源码构建目录放在较短的 ASCII 路径下（如 `G:\build`）。
+   MinGW 工具链在含中文的路径下会报 `Illegal byte sequence`；MSVC 对象文件路径过长（>250 字符）也会告警。`build_msvc.bat` 默认会把源码镜像到 `%TEMP%\BackupTool_src`，并构建到 `%TEMP%\BackupTool_build`。
 
 ### 3.4 MSVC 一键构建（Windows + VS 2022）
 
-仓库随附 `build_msvc.bat`。由于课程目录包含中文，Qt AUTOMOC 可能生成损坏的 include 路径；脚本会先把当前工程镜像到 `G:\_src_backup_tool_gui`，再 `call vcvars64.bat` 进入 MSVC 环境，用 Ninja 构建并运行测试：
+仓库随附 `build_msvc.bat`。由于课程目录包含中文，Qt AUTOMOC 可能生成损坏的 include 路径；脚本会先把当前工程镜像到 ASCII 临时路径，再 `call vcvars64.bat` 进入 MSVC 环境，用 Ninja 构建并运行测试：
 
 ```bat
 build_msvc.bat
 ```
 
-成功后生成：
+默认生成物：
 
-- `G:\_build_backup_tool_gui_ascii\BackupTool.exe`
-- `G:\_build_backup_tool_gui_ascii\backup_tests.exe`
-- `G:\_build_backup_tool_gui_ascii\real_backend_smoke.exe`
+- `%TEMP%\BackupTool_build\BackupTool.exe`
+- `%TEMP%\BackupTool_build\backup_tests.exe`（本机存在 GTest 或允许下载时）
+- `%TEMP%\BackupTool_build\real_backend_smoke.exe`（本机存在 GTest 或允许下载时）
 
 当前后端测试目标：
 
 - `backup_tests`：纯 C++ core 单元测试，不依赖 Qt。
 - `real_backend_smoke`：无窗口 Qt smoke test，验证 `BACKUP_BACKEND_MODE=real` 时工厂返回 `RealBackend`，并完成真实备份→还原闭环。
 
-手动等价命令：
+可选环境变量：
 
 ```bat
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-cmake -S G:\_src_backup_tool_gui -B G:\_build_backup_tool_gui_ascii -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=G:\Anaconda3\Library -DCMAKE_CXX_COMPILER=cl
-cmake --build G:\_build_backup_tool_gui_ascii
-ctest --test-dir G:\_build_backup_tool_gui_ascii --output-on-failure
+set QT_PREFIX=C:\Qt\5.15.2\msvc2019_64
+set BACKUP_ALLOW_GTEST_DOWNLOAD=ON
+build_msvc.bat
 ```
+
+CMake 默认不联网下载 GoogleTest；若本机没有 GTest，会跳过测试目标。需要自动下载时显式设置 `BACKUP_ALLOW_GTEST_DOWNLOAD=ON`。
 
 ---
 
 ## 四、运行与使用
 
-1. 双击 `BackupTool.exe`（首次运行需保证同目录或 PATH 下有 `Qt5Widgets.dll`、`Qt5Core.dll`、`Qt5Concurrent.dll` 及平台插件 `platforms/qwindows.dll`；可用 `windeployqt BackupTool.exe` 一键收集）。
+1. 交付目录中双击 `启动软件-本地.bat` 可进入真实后端；双击 `启动软件-仅演示界面.bat` 可进入 Mock 演示后端。`bin` 目录已包含 Qt/VC 运行库，不依赖 Anaconda 或固定盘符。
 2. **① 备份**：选源目录 → 选备份包保存路径（`*.pbackup`）→ 按需勾选哈夫曼压缩 / AES-256 加密（勾选加密后填写密码）→ 点「开始备份」。
 3. **② 筛选**：设置路径、类型、名称、大小、时间、属主六类条件，真实后端会在备份时应用这些条件；Mock 后端仅用于界面演示。
 4. **③ 还原**：选备份包 → 选目标目录 → 如为加密包填密码 → 可选「覆盖同名文件」→ 点「开始还原」。
@@ -150,18 +151,18 @@ ctest --test-dir G:\_build_backup_tool_gui_ascii --output-on-failure
 
 ```powershell
 $env:BACKUP_BACKEND_MODE = "real"
-& "G:\_build_backup_tool_gui_ascii\BackupTool.exe"
+& ".\bin\BackupTool.exe"
 ```
 
 ### 4.2 无障碍 / 大字号
 
-界面默认使用大字号（14pt）、大按钮（240×56），高对比度配色，照顾视觉体验。可通过环境变量覆盖：
+界面默认使用常规桌面字号、清晰按钮和高对比度配色。可通过环境变量覆盖：
 
 ```bat
 set BACKUP_FONT_SIZE=18
 ```
 
-（有效范围 10–28。）
+（有效范围 8–24。）
 
 ---
 

@@ -58,6 +58,8 @@ add_executable(BackupTool
     src/FilterTab.h
     src/LogPanel.cpp
     src/LogPanel.h
+    src/DecorativePanel.cpp
+    src/DecorativePanel.h
     src/BackendAdapter.cpp
     src/BackendAdapter.h
     src/MockBackend.cpp
@@ -94,84 +96,115 @@ target_compile_definitions(BackupTool PRIVATE
 )
 
 if (BUILD_TESTING)
-    include(FetchContent)
-    FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-        TLS_VERIFY FALSE
-    )
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(googletest)
+    option(BACKUP_ALLOW_GTEST_DOWNLOAD "Allow CMake to download GoogleTest when it is not installed" OFF)
+    find_package(GTest QUIET)
+    set(BACKUP_HAS_GTEST OFF)
 
-    add_executable(backup_tests
-        tests/core_tests.cpp
-        ${BACKUP_CORE_SOURCES}
-    )
-    target_include_directories(backup_tests PRIVATE src)
-    target_link_libraries(backup_tests
-        PRIVATE
-            GTest::gtest_main
-            bcrypt
-            Advapi32
-    )
-    include(GoogleTest)
-    gtest_discover_tests(backup_tests)
+    if (GTest_FOUND)
+        if (TARGET GTest::gtest)
+            set(BACKUP_GTEST_LIB GTest::gtest)
+        elseif (TARGET GTest::GTest)
+            set(BACKUP_GTEST_LIB GTest::GTest)
+        endif()
+        if (TARGET GTest::gtest_main)
+            set(BACKUP_GTEST_MAIN_LIB GTest::gtest_main)
+        elseif (TARGET GTest::Main)
+            set(BACKUP_GTEST_MAIN_LIB GTest::Main)
+        endif()
+        if (BACKUP_GTEST_LIB AND BACKUP_GTEST_MAIN_LIB)
+            set(BACKUP_HAS_GTEST ON)
+        else()
+            message(WARNING "GoogleTest was found but did not export expected CMake targets; tests are skipped.")
+        endif()
+    elseif (BACKUP_ALLOW_GTEST_DOWNLOAD)
+        include(FetchContent)
+        FetchContent_Declare(
+            googletest
+            URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+            DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+            TLS_VERIFY TRUE
+        )
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+        FetchContent_MakeAvailable(googletest)
+        set(BACKUP_HAS_GTEST ON)
+        set(BACKUP_GTEST_LIB GTest::gtest)
+        set(BACKUP_GTEST_MAIN_LIB GTest::gtest_main)
+    else()
+        message(WARNING "GoogleTest not found; tests are skipped. Install GTest or pass -DBACKUP_ALLOW_GTEST_DOWNLOAD=ON to let CMake download it.")
+    endif()
 
-    add_executable(real_backend_smoke
-        tests/real_backend_smoke.cpp
-        src/BackendAdapter.cpp
-        src/BackendAdapter.h
-        src/MockBackend.cpp
-        src/MockBackend.h
-        src/RealBackend.cpp
-        src/RealBackend.h
-        ${BACKUP_CORE_SOURCES}
-    )
-    target_include_directories(real_backend_smoke PRIVATE src)
-    target_link_libraries(real_backend_smoke
-        PRIVATE
-            GTest::gtest
-            Qt5::Core
-            Qt5::Concurrent
-            Qt5::Widgets
-            bcrypt
-            Advapi32
-    )
-    gtest_discover_tests(real_backend_smoke)
+    if (BACKUP_HAS_GTEST)
+        add_executable(backup_tests
+            tests/core_tests.cpp
+            ${BACKUP_CORE_SOURCES}
+        )
+        target_include_directories(backup_tests PRIVATE src)
+        target_link_libraries(backup_tests
+            PRIVATE
+                ${BACKUP_GTEST_MAIN_LIB}
+                bcrypt
+                Advapi32
+        )
+        include(GoogleTest)
+        gtest_discover_tests(backup_tests)
 
-    add_executable(gui_signal_smoke
-        tests/gui_signal_smoke.cpp
-        src/MainWindow.cpp
-        src/MainWindow.h
-        src/BackupTab.cpp
-        src/BackupTab.h
-        src/RestoreTab.cpp
-        src/RestoreTab.h
-        src/FilterTab.cpp
-        src/FilterTab.h
-        src/LogPanel.cpp
-        src/LogPanel.h
-        src/PathPicker.cpp
-        src/PathPicker.h
-        src/Theme.cpp
-        src/Theme.h
-        src/BackendAdapter.cpp
-        src/BackendAdapter.h
-        src/MockBackend.cpp
-        src/MockBackend.h
-        src/RealBackend.cpp
-        src/RealBackend.h
-        ${BACKUP_CORE_SOURCES}
-    )
-    target_include_directories(gui_signal_smoke PRIVATE src)
-    target_link_libraries(gui_signal_smoke
-        PRIVATE
-            GTest::gtest
-            Qt5::Widgets
-            Qt5::Concurrent
-            bcrypt
-            Advapi32
-    )
-    gtest_discover_tests(gui_signal_smoke)
+        add_executable(real_backend_smoke
+            tests/real_backend_smoke.cpp
+            src/BackendAdapter.cpp
+            src/BackendAdapter.h
+            src/MockBackend.cpp
+            src/MockBackend.h
+            src/RealBackend.cpp
+            src/RealBackend.h
+            ${BACKUP_CORE_SOURCES}
+        )
+        target_include_directories(real_backend_smoke PRIVATE src)
+        target_link_libraries(real_backend_smoke
+            PRIVATE
+                ${BACKUP_GTEST_LIB}
+                Qt5::Core
+                Qt5::Concurrent
+                Qt5::Widgets
+                bcrypt
+                Advapi32
+        )
+        gtest_discover_tests(real_backend_smoke)
+
+        add_executable(gui_signal_smoke
+            tests/gui_signal_smoke.cpp
+            src/MainWindow.cpp
+            src/MainWindow.h
+            src/BackupTab.cpp
+            src/BackupTab.h
+            src/RestoreTab.cpp
+            src/RestoreTab.h
+            src/FilterTab.cpp
+            src/FilterTab.h
+            src/LogPanel.cpp
+            src/LogPanel.h
+            src/DecorativePanel.cpp
+            src/DecorativePanel.h
+            src/PathPicker.cpp
+            src/PathPicker.h
+            src/Theme.cpp
+            src/Theme.h
+            src/BackendAdapter.cpp
+            src/BackendAdapter.h
+            src/MockBackend.cpp
+            src/MockBackend.h
+            src/RealBackend.cpp
+            src/RealBackend.h
+            ${BACKUP_CORE_SOURCES}
+        )
+        target_include_directories(gui_signal_smoke PRIVATE src)
+        target_link_libraries(gui_signal_smoke
+            PRIVATE
+                ${BACKUP_GTEST_LIB}
+                Qt5::Widgets
+                Qt5::Concurrent
+                bcrypt
+                Advapi32
+        )
+        gtest_discover_tests(gui_signal_smoke)
+    endif()
 endif()

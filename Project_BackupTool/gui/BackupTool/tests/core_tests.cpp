@@ -337,6 +337,18 @@ TEST(BackupRestoreTest, OverwriteTrueReplacesExistingFile) {
     EXPECT_EQ(readText(t.path() / "dst" / "a.txt"), "new");
 }
 
+TEST(BackupRestoreTest, RejectsPathTraversalInArchive) {
+    TempDir t;
+    std::vector<ArchiveRecord> records;
+    records.push_back({sampleEntry("..\\escape.txt", EntryType::File, 6), bytes("escape")});
+    ArchiveOptions opt;
+    opt.compress = false;
+    writeArchive(t.path() / "evil.pbackup", records, opt);
+
+    EXPECT_THROW(restorePkg(t.path() / "evil.pbackup", t.path() / "dst"), BackupError);
+    EXPECT_FALSE(std::filesystem::exists(t.path() / "escape.txt"));
+}
+
 TEST(ScannerTest, ScansRegularFiles) {
     TempDir t;
     writeText(t.path() / "src" / "a.txt", "x");

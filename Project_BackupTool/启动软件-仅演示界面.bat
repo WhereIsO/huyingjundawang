@@ -1,6 +1,9 @@
-@echo off
-chcp 65001 >nul
-rem 仅演示界面（Mock 后端，不进行真实读写）。
-set "PATH=G:\Anaconda3\Library\bin;%PATH%"
-set "QT_QPA_PLATFORM_PLUGIN_PATH=G:\Anaconda3\Library\plugins\platforms"
-start "" "%~dp0bin\BackupTool.exe"
+@echo off
+chcp 65001 >nul
+title 数据备份工具 - 演示模式
+rem 演示模式不设置 BACKUP_BACKEND_MODE，后端使用 Mock，不执行真实备份/还原。
+set "BACKUP_BACKEND_MODE="
+set "APP_DIR=%~dp0bin"
+set "PATH=%APP_DIR%;%PATH%"
+cd /d "%APP_DIR%"
+start "" "%APP_DIR%\BackupTool.exe"

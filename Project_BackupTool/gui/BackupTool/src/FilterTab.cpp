@@ -1,4 +1,5 @@
 #include "FilterTab.h"
+#include "DecorativePanel.h"
 #include "Theme.h"
 
 #include <QLabel>
@@ -12,6 +13,7 @@
 #include <QScrollArea>
 #include <QFrame>
 #include <QDate>
+#include <array>
 
 namespace pbackup::ui {
 
@@ -31,24 +33,44 @@ static QGroupBox* makeGroup(const QString& title, QWidget* parent) {
 }
 
 FilterTab::FilterTab(QWidget* parent) : QWidget(parent) {
-    // 外层：仅承载一个滚动区，保证窗口变小时筛选项可滚动、不被裁切
-    auto* outer = new QVBoxLayout(this);
-    outer->setContentsMargins(0, 0, 0, 0);
+    setObjectName(QStringLiteral("PageRoot"));
+    auto* outer = new QHBoxLayout(this);
+    outer->setContentsMargins(22, 22, 22, 22);
+    outer->setSpacing(Theme::sectionSpacing());
+
+    auto* decor = new DecorativePanel(
+        QStringLiteral("筛选规则"),
+        QStringLiteral("默认不过滤。开启某类规则后，多个条件按 AND 关系共同生效。"),
+        {QStringLiteral("路径包含或排除"),
+         QStringLiteral("按名称通配符匹配"),
+         QStringLiteral("按类型、大小、时间筛选"),
+         QStringLiteral("可选按 Owner SID 限定")},
+        QColor(Theme::accentColor()),
+        this);
+    outer->addWidget(decor, 0);
+
     auto* scroll = new QScrollArea(this);
     scroll->setWidgetResizable(true);
     scroll->setFrameShape(QFrame::NoFrame);
     scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    outer->addWidget(scroll);
+    outer->addWidget(scroll, 1);
 
     auto* content = new QWidget(scroll);
     scroll->setWidget(content);
     auto* root = new QVBoxLayout(content);
-    root->setContentsMargins(24, 24, 24, 24);
-    root->setSpacing(Theme::rowSpacing());
+    root->setContentsMargins(0, 0, 0, 0);
+    root->setSpacing(Theme::sectionSpacing());
 
-    auto* title = new QLabel(QStringLiteral("筛选条件（可留空 = 不过滤）"), content);
+    auto* title = new QLabel(QStringLiteral("规则编辑"), content);
     title->setFont(Theme::titleFont());
+    title->setObjectName(QStringLiteral("SectionTitle"));
     root->addWidget(title);
+
+    auto* hint = new QLabel(QStringLiteral("留空表示不限制。路径支持多个英文逗号分隔项，名称通配符支持单个模式。"), content);
+    hint->setObjectName(QStringLiteral("SectionHint"));
+    hint->setFont(Theme::appFont());
+    hint->setWordWrap(true);
+    root->addWidget(hint);
 
     // —— 路径 ——
     auto* gPath = makeGroup(QStringLiteral("① 路径"), this);
@@ -63,24 +85,42 @@ FilterTab::FilterTab(QWidget* parent) : QWidget(parent) {
     // —— 名称 ——
     auto* gName = makeGroup(QStringLiteral("② 名称"), this);
     auto* fName = new QFormLayout(gName);
-    m_nameGlob = makeEdit(this, QStringLiteral("通配符，例：*.docx；多个用英文逗号隔开"));
+    m_nameGlob = makeEdit(this, QStringLiteral("通配符，例：*.docx"));
     fName->addRow(QStringLiteral("文件名"), m_nameGlob);
     root->addWidget(gName);
 
     // —— 类型 ——
     auto* gType = makeGroup(QStringLiteral("③ 类型"), this);
-    auto* hType = new QHBoxLayout(gType);
-    hType->setSpacing(Theme::sectionSpacing());
+    auto* typeRoot = new QVBoxLayout(gType);
+    typeRoot->setSpacing(Theme::rowSpacing());
+    m_useTypeFilter = new QCheckBox(QStringLiteral("按类型筛选"), this);
+    m_useTypeFilter->setFont(Theme::appFont());
+    typeRoot->addWidget(m_useTypeFilter);
+
+    auto* hType = new QHBoxLayout();
+    hType->setSpacing(Theme::rowSpacing());
     m_typeFile     = new QCheckBox(QStringLiteral("普通文件"), this);
     m_typeDir      = new QCheckBox(QStringLiteral("目录"), this);
+    m_typeEmptyDir = new QCheckBox(QStringLiteral("空目录"), this);
     m_typeSymlink  = new QCheckBox(QStringLiteral("符号链接"), this);
     m_typeHardlink = new QCheckBox(QStringLiteral("硬链接"), this);
-    for (QCheckBox* c : {m_typeFile, m_typeDir, m_typeSymlink, m_typeHardlink}) {
+    m_typeJunction = new QCheckBox(QStringLiteral("Junction"), this);
+    m_typeReparse  = new QCheckBox(QStringLiteral("ReparsePoint"), this);
+    const std::array<QCheckBox*, 7> typeChecks = {
+        m_typeFile, m_typeDir, m_typeEmptyDir, m_typeSymlink,
+        m_typeHardlink, m_typeJunction, m_typeReparse
+    };
+    for (QCheckBox* c : typeChecks) {
         c->setFont(Theme::appFont());
-        c->setChecked(true);   // 默认全选
+        c->setChecked(true);
+        c->setEnabled(false);
         hType->addWidget(c);
     }
     hType->addStretch();
+    typeRoot->addLayout(hType);
+    connect(m_useTypeFilter, &QCheckBox::toggled, this, [typeChecks](bool enabled) {
+        for (QCheckBox* c : typeChecks) c->setEnabled(enabled);
+    });
     root->addWidget(gType);
 
     // —— 大小 ——
@@ -142,12 +182,17 @@ FilterSpec FilterTab::buildSpec() const {
     s.excludePath = splitCsv(m_excludePath->text());
     s.nameGlob    = m_nameGlob->text().trimmed();
 
-    QStringList types;
-    if (m_typeFile->isChecked())     types << QStringLiteral("file");
-    if (m_typeDir->isChecked())      types << QStringLiteral("dir");
-    if (m_typeSymlink->isChecked())  types << QStringLiteral("symlink");
-    if (m_typeHardlink->isChecked()) types << QStringLiteral("hardlink");
-    s.typeFilter = types.join(QChar(','));
+    if (m_useTypeFilter->isChecked()) {
+        QStringList types;
+        if (m_typeFile->isChecked())     types << QStringLiteral("file");
+        if (m_typeDir->isChecked())      types << QStringLiteral("dir");
+        if (m_typeEmptyDir->isChecked()) types << QStringLiteral("emptydir");
+        if (m_typeSymlink->isChecked())  types << QStringLiteral("symlink");
+        if (m_typeHardlink->isChecked()) types << QStringLiteral("hardlink");
+        if (m_typeJunction->isChecked()) types << QStringLiteral("junction");
+        if (m_typeReparse->isChecked())  types << QStringLiteral("reparse");
+        s.typeFilter = types.join(QChar(','));
+    }
 
     s.sizeMin = m_sizeMin->text().trimmed();
     s.sizeMax = m_sizeMax->text().trimmed();

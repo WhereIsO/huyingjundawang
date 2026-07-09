@@ -1,8 +1,10 @@
 #include "BackupTab.h"
+#include "DecorativePanel.h"
 #include "PathPicker.h"
 #include "Theme.h"
 
 #include <QCheckBox>
+#include <QFrame>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -11,24 +13,87 @@
 
 namespace pbackup::ui {
 
+namespace {
+
+QFrame* makePanel(const QString& title, const QString& hint, QWidget* parent) {
+    auto* panel = new QFrame(parent);
+    panel->setObjectName(QStringLiteral("ContentPanel"));
+    auto* layout = new QVBoxLayout(panel);
+    layout->setContentsMargins(18, 16, 18, 16);
+    layout->setSpacing(Theme::rowSpacing());
+
+    auto* titleLabel = new QLabel(title, panel);
+    titleLabel->setObjectName(QStringLiteral("SectionTitle"));
+    titleLabel->setFont(Theme::titleFont());
+    layout->addWidget(titleLabel);
+
+    auto* hintLabel = new QLabel(hint, panel);
+    hintLabel->setObjectName(QStringLiteral("SectionHint"));
+    hintLabel->setFont(Theme::appFont());
+    hintLabel->setWordWrap(true);
+    layout->addWidget(hintLabel);
+    return panel;
+}
+
+} // namespace
+
 BackupTab::BackupTab(QWidget* parent) : QWidget(parent) {
-    auto* root = new QVBoxLayout(this);
-    root->setContentsMargins(24, 24, 24, 24);
+    setObjectName(QStringLiteral("PageRoot"));
+    auto* root = new QHBoxLayout(this);
+    root->setContentsMargins(22, 22, 22, 22);
     root->setSpacing(Theme::sectionSpacing());
 
-    auto* title = new QLabel(QStringLiteral("创建备份"), this);
-    title->setFont(Theme::titleFont());
-    root->addWidget(title);
+    auto* decor = new DecorativePanel(
+        QStringLiteral("创建备份"),
+        QStringLiteral("把目录树整理为单个 .pbackup 文件，可压缩、可加密、可按条件筛选。"),
+        {QStringLiteral("选择源目录"),
+         QStringLiteral("设置输出备份包"),
+         QStringLiteral("确认压缩和加密策略"),
+         QStringLiteral("启动后台备份任务")},
+        QColor(Theme::primaryColor()),
+        this);
+    root->addWidget(decor, 0);
 
+    auto* content = new QVBoxLayout();
+    content->setSpacing(Theme::sectionSpacing());
+    root->addLayout(content, 1);
+
+    auto* pathPanel = makePanel(QStringLiteral("路径设置"),
+                                QStringLiteral("源目录会被扫描为目录树，输出路径建议使用 .pbackup 后缀。"),
+                                this);
+    auto* pathLayout = qobject_cast<QVBoxLayout*>(pathPanel->layout());
     m_source = new PathPicker(QStringLiteral("源目录"), PathPicker::Directory, this);
     m_source->setPlaceholder(QStringLiteral("选择要备份的文件夹"));
-    root->addWidget(m_source);
+    pathLayout->addWidget(m_source);
 
     m_output = new PathPicker(QStringLiteral("备份包"), PathPicker::SaveFile, this);
     m_output->setPlaceholder(QStringLiteral("保存为 *.pbackup"));
-    root->addWidget(m_output);
+    pathLayout->addWidget(m_output);
+    content->addWidget(pathPanel);
 
-    // 选项行：压缩 / 加密
+    auto* optionPanel = new QFrame(this);
+    optionPanel->setObjectName(QStringLiteral("OptionPanel"));
+    auto* optionLayout = new QVBoxLayout(optionPanel);
+    optionLayout->setContentsMargins(18, 16, 18, 16);
+    optionLayout->setSpacing(Theme::rowSpacing());
+
+    auto* optionTitle = new QLabel(QStringLiteral("备份策略"), optionPanel);
+    optionTitle->setObjectName(QStringLiteral("SectionTitle"));
+    optionTitle->setFont(Theme::titleFont());
+    optionLayout->addWidget(optionTitle);
+
+    auto* optionHint = new QLabel(QStringLiteral("压缩适合文本和重复数据；加密会使用 AES-256-GCM 保护备份包。"), optionPanel);
+    optionHint->setObjectName(QStringLiteral("SectionHint"));
+    optionHint->setFont(Theme::appFont());
+    optionHint->setWordWrap(true);
+    optionLayout->addWidget(optionHint);
+
+    auto* band = new QFrame(optionPanel);
+    band->setObjectName(QStringLiteral("InlineBand"));
+    auto* bandLayout = new QVBoxLayout(band);
+    bandLayout->setContentsMargins(14, 12, 14, 12);
+    bandLayout->setSpacing(Theme::rowSpacing());
+
     auto* optRow = new QHBoxLayout();
     optRow->setSpacing(Theme::sectionSpacing());
     m_compress = new QCheckBox(QStringLiteral("哈夫曼压缩"), this);
@@ -39,9 +104,8 @@ BackupTab::BackupTab(QWidget* parent) : QWidget(parent) {
     optRow->addWidget(m_compress);
     optRow->addWidget(m_encrypt);
     optRow->addStretch();
-    root->addLayout(optRow);
+    bandLayout->addLayout(optRow);
 
-    // 密码行（勾选加密才启用）
     auto* pwdRow = new QHBoxLayout();
     auto* pwdLabel = new QLabel(QStringLiteral("密码"), this);
     pwdLabel->setFont(Theme::appFont());
@@ -55,27 +119,35 @@ BackupTab::BackupTab(QWidget* parent) : QWidget(parent) {
     m_password->setEnabled(false);
     pwdRow->addWidget(pwdLabel);
     pwdRow->addWidget(m_password);
-    root->addLayout(pwdRow);
+    bandLayout->addLayout(pwdRow);
+    optionLayout->addWidget(band);
+    content->addWidget(optionPanel);
 
-    root->addStretch();
-
-    // 操作按钮
+    auto* actionPanel = new QFrame(this);
+    actionPanel->setObjectName(QStringLiteral("ActionPanel"));
+    auto* actionLayout = new QHBoxLayout(actionPanel);
+    actionLayout->setContentsMargins(18, 14, 18, 14);
+    actionLayout->setSpacing(Theme::rowSpacing());
+    auto* actionHint = new QLabel(QStringLiteral("任务运行时会锁定输入，并在底部日志中显示进度。"), actionPanel);
+    actionHint->setObjectName(QStringLiteral("SectionHint"));
+    actionHint->setFont(Theme::appFont());
+    actionHint->setWordWrap(true);
+    actionLayout->addWidget(actionHint, 1);
     auto* btnRow = new QHBoxLayout();
-    btnRow->addStretch();
     m_cancel = new QPushButton(QStringLiteral("取消"), this);
+    m_cancel->setObjectName(QStringLiteral("SecondaryButton"));
     m_cancel->setFont(Theme::appFont());
     m_cancel->setMinimumSize(Theme::buttonSize());
     m_cancel->setEnabled(false);
     m_start = new QPushButton(QStringLiteral("开始备份"), this);
+    m_start->setObjectName(QStringLiteral("PrimaryButton"));
     m_start->setFont(Theme::appFont());
     m_start->setMinimumSize(Theme::buttonSize());
-    m_start->setStyleSheet(QStringLiteral(
-        "QPushButton{background:%1;color:#fff;border:none;border-radius:8px;}"
-        "QPushButton:disabled{background:#B0BEC5;}")
-        .arg(Theme::primaryColor()));
     btnRow->addWidget(m_cancel);
     btnRow->addWidget(m_start);
-    root->addLayout(btnRow);
+    actionLayout->addLayout(btnRow);
+    content->addWidget(actionPanel);
+    content->addStretch(1);
 
     connect(m_encrypt, &QCheckBox::toggled, this, &BackupTab::onEncryptToggled);
     connect(m_start,  &QPushButton::clicked, this, &BackupTab::startRequested);

@@ -31,6 +31,9 @@ struct Theme {
     static QString textColor();
     static QString mutedTextColor();
     static QString borderColor();
+    static QString successColor();
+    static QString windowBgColor();
+    static QString styleSheet();
 };
 
 } // namespace pbackup::ui

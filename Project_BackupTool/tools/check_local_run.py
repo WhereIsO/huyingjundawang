@@ -1,20 +1,31 @@
 # -*- coding: utf-8 -*-
-import sys
-sys.stdout.reconfigure(encoding='utf-8')
 import os
+import sys
+from pathlib import Path
 
-# 本地已构建的 exe
-for p in [r"G:\_build_backup_tool_gui_ascii\BackupTool.exe",
-          r"G:\_bmsvc\BackupTool.exe"]:
-    print("EXE", os.path.exists(p), p)
+sys.stdout.reconfigure(encoding="utf-8")
 
-# Qt 运行库位置
-qtbin = r"G:\Anaconda3\Library\bin"
-print("Qt bin exists:", os.path.exists(qtbin))
-plat = r"G:\Anaconda3\Library\plugins\platforms\qwindows.dll"
-print("qwindows plugin:", os.path.exists(plat))
+root = Path(__file__).resolve().parents[1]
+bin_dir = root / "bin"
+exe = bin_dir / "BackupTool.exe"
+real_launcher = root / "启动软件-本地.bat"
+mock_launcher = root / "启动软件-仅演示界面.bat"
+dist_zip = root / "dist" / "数据备份工具_可分发.zip"
 
-# 课程文件夹 gui 目录，用于放本地启动脚本
-gui = r"F:\Files\Payki in UESTC\学习与课程\VII. Senior I（2026-2027）\【工】软件开发综合实验-李忻洋\Project_BackupTool\gui\BackupTool"
-print("gui dir exists:", os.path.exists(gui))
-print("build_msvc.bat exists:", os.path.exists(os.path.join(gui,"build_msvc.bat")))
+required_runtime = [
+    "Qt5Core_conda.dll",
+    "Qt5Gui_conda.dll",
+    "Qt5Widgets_conda.dll",
+    "platforms/qwindows.dll",
+    "VCRUNTIME140.dll",
+]
+
+print("Project root:", root)
+print("EXE:", exe.exists(), exe)
+print("Real launcher:", real_launcher.exists(), real_launcher)
+print("Mock launcher:", mock_launcher.exists(), mock_launcher)
+print("Dist zip:", dist_zip.exists(), dist_zip)
+print("Runtime files:")
+for name in required_runtime:
+    p = bin_dir / name
+    print(" ", p.exists(), name)

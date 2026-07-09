@@ -12,16 +12,16 @@
 - 操作系统：Windows 11，x64。
 - 编译器：**MSVC 14.44**（Visual Studio 2022 Community 的 `cl.exe`），C++17。
   **不要用 MinGW / g++**——本机的 Qt 是 MSVC 构建的，ABI 与 MinGW 不兼容，混用必然链接失败（本项目已踩过这个坑）。
-- GUI 框架：**Qt 5.15.2（MSVC 版）**，位于 `G:\Anaconda3\Library`。
+- GUI 框架：**Qt 5.12+（MSVC 版）**。本机路径不固定，构建时通过 `QT_PREFIX` 或 `CMAKE_PREFIX_PATH` 指向 Qt 开发包。
 - 构建系统：CMake + Ninja。配置示例：
   ```
   cmake -S <src> -B <build> -G Ninja -DCMAKE_BUILD_TYPE=Release ^
-        -DCMAKE_PREFIX_PATH=G:\Anaconda3\Library -DCMAKE_CXX_COMPILER=cl
+        -DCMAKE_PREFIX_PATH=<Qt根目录> -DCMAKE_CXX_COMPILER=cl
   cmake --build <build>
   ```
-  编译前需先 `call` VS 的 `vcvars64.bat` 进入 MSVC 环境（路径：`C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat`）。
+  编译前需先 `call` VS 的 `vcvars64.bat` 进入 MSVC 环境；也可直接运行 `gui\BackupTool\build_msvc.bat`，让脚本查找常见 VS 2022 路径。
 - **源码一律 UTF-8 编码**。CMake 里已对 MSVC 加了 `/utf-8`；你新增的所有文件也必须保存为 UTF-8，否则中文注释/字符串会触发 `C2001 / C1057`（本项目已踩过这个坑）。
-- 路径陷阱：项目真实路径含中文（见下）。MinGW 及部分工具在中文路径下会报 `Illegal byte sequence`。若某工具在中文路径下异常，可把源码整体复制到纯 ASCII 短路径（如 `G:\_src`）再构建——这是已验证可行的规避手段，不是代码问题。
+- 路径陷阱：项目真实路径含中文（见下）。MinGW 及部分工具在中文路径下会报 `Illegal byte sequence`。若某工具在中文路径下异常，可把源码整体复制到纯 ASCII 短路径（如 `%TEMP%\BackupTool_src`）再构建——这是已验证可行的规避手段，不是代码问题。
 
 ## 二、项目目录（真实路径，含中文，请在此工作）
 
