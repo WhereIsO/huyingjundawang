@@ -1,0 +1,32 @@
+# Build / runtime artifacts (tracked by release, not source)
+bin/
+dist/
+*.zip
+*.exe
+*.dll
+
+# IDE / editor
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.user
+*.suo
+CMakeUserPresets.json
+
+# Build directories
+build/
+cmake-build-*/
+out/
+
+# OS
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
