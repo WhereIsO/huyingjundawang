@@ -1,0 +1,4 @@
+# Python GUI 依赖
+# 安装命令：pip install -r requirements.txt
+
+PyQt5>=5.15

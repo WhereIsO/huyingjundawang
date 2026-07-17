@@ -1,0 +1,28 @@
+# Python 运行缓存
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Python 打包和虚拟环境
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+
+# 本程序生成的备份包和临时文件
+*.pbackup
+*.tmp
+
+# 编辑器和系统文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store
+Desktop.ini
+

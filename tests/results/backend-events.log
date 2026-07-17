@@ -1,0 +1,1088 @@
+﻿===== pbackup_core.exe capabilities =====
+{"type":"result","data":{"format":"PBACKUP-CPP3","compression":{"stored":"无压缩（最快）","mszip":"MSZIP / Deflate（通用）","xpress":"XPRESS（快速）","xpress_huff":"XPRESS Huffman（平衡）","lzms":"LZMS（高压缩率）"},"encryption":{"none":"不加密","aes256_gcm":"AES-256-GCM（认证加密）","chacha20_poly1305":"ChaCha20-Poly1305（认证加密）"}}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-011/data.pbackup --compression stored --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-011/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"none","output":"tests/work/TC-011/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-011/data.pbackup --destination tests/work/TC-011/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-011/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-011/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-012/data.pbackup --compression stored --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-012/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"aes256_gcm","output":"tests/work/TC-012/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-012/data.pbackup --destination tests/work/TC-012/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-012/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-012/restore","compression":"stored","encryption":"aes256_gcm"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-013/data.pbackup --compression stored --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-013/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"chacha20_poly1305","output":"tests/work/TC-013/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-013/data.pbackup --destination tests/work/TC-013/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-013/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-013/restore","compression":"stored","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-014/data.pbackup --compression mszip --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":182,"done_bytes":182,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-014/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"mszip","encryption":"none","output":"tests/work/TC-014/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-014/data.pbackup --destination tests/work/TC-014/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-014/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-014/restore","compression":"mszip","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-015/data.pbackup --compression mszip --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":182,"done_bytes":182,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-015/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"mszip","encryption":"aes256_gcm","output":"tests/work/TC-015/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-015/data.pbackup --destination tests/work/TC-015/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":182,"done_bytes":182,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-015/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-015/restore","compression":"mszip","encryption":"aes256_gcm"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-016/data.pbackup --compression mszip --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":182,"done_bytes":182,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-016/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"mszip","encryption":"chacha20_poly1305","output":"tests/work/TC-016/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-016/data.pbackup --destination tests/work/TC-016/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":182,"done_bytes":182,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-016/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-016/restore","compression":"mszip","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-017/data.pbackup --compression xpress --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-017/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"xpress","encryption":"none","output":"tests/work/TC-017/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-017/data.pbackup --destination tests/work/TC-017/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-017/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-017/restore","compression":"xpress","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-018/data.pbackup --compression xpress --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-018/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"xpress","encryption":"aes256_gcm","output":"tests/work/TC-018/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-018/data.pbackup --destination tests/work/TC-018/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-018/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-018/restore","compression":"xpress","encryption":"aes256_gcm"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-019/data.pbackup --compression xpress --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-019/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"xpress","encryption":"chacha20_poly1305","output":"tests/work/TC-019/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-019/data.pbackup --destination tests/work/TC-019/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-019/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-019/restore","compression":"xpress","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-020/data.pbackup --compression xpress_huff --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-020/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"xpress_huff","encryption":"none","output":"tests/work/TC-020/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-020/data.pbackup --destination tests/work/TC-020/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-020/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-020/restore","compression":"xpress_huff","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-021/data.pbackup --compression xpress_huff --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-021/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"xpress_huff","encryption":"aes256_gcm","output":"tests/work/TC-021/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-021/data.pbackup --destination tests/work/TC-021/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-021/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-021/restore","compression":"xpress_huff","encryption":"aes256_gcm"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-022/data.pbackup --compression xpress_huff --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-022/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"xpress_huff","encryption":"chacha20_poly1305","output":"tests/work/TC-022/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-022/data.pbackup --destination tests/work/TC-022/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-022/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-022/restore","compression":"xpress_huff","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-023/data.pbackup --compression lzms --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-023/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"lzms","encryption":"none","output":"tests/work/TC-023/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-023/data.pbackup --destination tests/work/TC-023/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-023/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-023/restore","compression":"lzms","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-024/data.pbackup --compression lzms --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-024/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"lzms","encryption":"aes256_gcm","output":"tests/work/TC-024/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-024/data.pbackup --destination tests/work/TC-024/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-024/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-024/restore","compression":"lzms","encryption":"aes256_gcm"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-025/data.pbackup --compression lzms --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-025/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"lzms","encryption":"chacha20_poly1305","output":"tests/work/TC-025/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-025/data.pbackup --destination tests/work/TC-025/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":178,"done_bytes":178,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-025/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-025/restore","compression":"lzms","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-026/data.pbackup --compression stored --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":66350,"done_bytes":66350,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-026/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"stored","encryption":"none","output":"tests/work/TC-026/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-026/data.pbackup --destination tests/work/TC-026/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-026/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-026/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-027/data.pbackup --compression mszip --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":1676,"done_bytes":1676,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-027/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"mszip","encryption":"none","output":"tests/work/TC-027/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-027/data.pbackup --destination tests/work/TC-027/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-027/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-027/restore","compression":"mszip","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-028/data.pbackup --compression xpress --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":1319,"done_bytes":1319,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-028/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"xpress","encryption":"none","output":"tests/work/TC-028/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-028/data.pbackup --destination tests/work/TC-028/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-028/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-028/restore","compression":"xpress","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-029/data.pbackup --compression xpress_huff --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":1545,"done_bytes":1545,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-029/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"xpress_huff","encryption":"none","output":"tests/work/TC-029/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-029/data.pbackup --destination tests/work/TC-029/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-029/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-029/restore","compression":"xpress_huff","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-030/data.pbackup --compression lzms --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":1046,"done_bytes":1046,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-030/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"lzms","encryption":"none","output":"tests/work/TC-030/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-030/data.pbackup --destination tests/work/TC-030/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-030/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-030/restore","compression":"lzms","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-031/data.pbackup --compression mszip --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":1676,"done_bytes":1676,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-031/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"mszip","encryption":"aes256_gcm","output":"tests/work/TC-031/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-031/data.pbackup --destination tests/work/TC-031/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":1676,"done_bytes":1676,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-031/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-031/restore","compression":"mszip","encryption":"aes256_gcm"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-032/data.pbackup --compression mszip --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：9"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":1676,"done_bytes":1676,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-032/data.pbackup"}
+{"type":"result","data":{"entries":9,"files":7,"total_bytes":65601,"compression":"mszip","encryption":"chacha20_poly1305","output":"tests/work/TC-032/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-032/data.pbackup --destination tests/work/TC-032/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":1676,"done_bytes":1676,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":4,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":5,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":6,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":7,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":8,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":9,"done_files":9,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-032/restore"}
+{"type":"result","data":{"entries":9,"files":7,"destination":"tests/work/TC-032/restore","compression":"mszip","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-033/data.pbackup --compression stored --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-033/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"aes256_gcm","output":"tests/work/TC-033/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-033/data.pbackup --destination tests/work/TC-033/restore --overwrite 1 =====
+{"type":"error","message":"解密失败：密码错误或备份包已损坏。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-034/data.pbackup --compression stored --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-034/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"chacha20_poly1305","output":"tests/work/TC-034/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-034/data.pbackup --destination tests/work/TC-034/restore --overwrite 1 =====
+{"type":"error","message":"解密失败：密码错误或备份包已损坏。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-035/data.pbackup --compression stored --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-035/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"aes256_gcm","output":"tests/work/TC-035/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-035/corrupt.pbackup --destination tests/work/TC-035/corrupt-restore --overwrite 1 =====
+{"type":"error","message":"解密失败：密码错误或备份包已损坏。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-036/data.pbackup --compression stored --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-036/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"chacha20_poly1305","output":"tests/work/TC-036/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-036/corrupt.pbackup --destination tests/work/TC-036/corrupt-restore --overwrite 1 =====
+{"type":"error","message":"解密失败：密码错误或备份包已损坏。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-037/data.pbackup --compression stored --encryption none --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-037/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"none","output":"tests/work/TC-037/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-037/corrupt.pbackup --destination tests/work/TC-037/corrupt-restore --overwrite 1 =====
+{"type":"error","message":"备份包负载 SHA-256 校验失败。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-038/data.pbackup --compression stored --encryption none =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-038/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"none","output":"tests/work/TC-038/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-038/data.pbackup --destination tests/work/TC-038/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-038/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-038/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-038/data.pbackup --destination tests/work/TC-038/restore --overwrite 0 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"error","message":"目标文件已存在，未启用覆盖：standalone.txt"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-039/data.pbackup --compression stored --encryption none =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-039/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"none","output":"tests/work/TC-039/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-039/data.pbackup --destination tests/work/TC-039/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-039/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-039/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-039/data.pbackup --destination tests/work/TC-039/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-039/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-039/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-040/data.pbackup --compression stored --encryption none --include nested =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：3"}
+{"type":"progress","stage":"写入","total_files":3,"done_files":1,"total_bytes":22,"done_bytes":0,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":3,"done_files":1,"total_bytes":22,"done_bytes":12,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":3,"done_files":2,"total_bytes":22,"done_bytes":12,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":3,"done_files":2,"total_bytes":22,"done_bytes":22,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":3,"done_files":3,"total_bytes":22,"done_bytes":22,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":286,"done_bytes":286,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":3,"done_files":3,"total_bytes":22,"done_bytes":22,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-040/data.pbackup"}
+{"type":"result","data":{"entries":3,"files":2,"total_bytes":22,"compression":"stored","encryption":"none","output":"tests/work/TC-040/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-040/data.pbackup --destination tests/work/TC-040/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":3,"done_files":0,"total_bytes":22,"done_bytes":0,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":3,"done_files":1,"total_bytes":22,"done_bytes":0,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":3,"done_files":1,"total_bytes":22,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":3,"done_files":2,"total_bytes":22,"done_bytes":12,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":3,"done_files":2,"total_bytes":22,"done_bytes":12,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":3,"done_files":3,"total_bytes":22,"done_bytes":22,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":3,"done_files":3,"total_bytes":22,"done_bytes":22,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-040/restore"}
+{"type":"result","data":{"entries":3,"files":2,"destination":"tests/work/TC-040/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-041/data.pbackup --compression stored --encryption none --exclude skip =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：8"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":0,"total_bytes":65591,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":1,"total_bytes":65591,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":1,"total_bytes":65591,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":2,"total_bytes":65591,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":3,"total_bytes":65591,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":4,"total_bytes":65591,"done_bytes":65542,"current_path":"nested","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":4,"total_bytes":65591,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":5,"total_bytes":65591,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":5,"total_bytes":65591,"done_bytes":65572,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":6,"total_bytes":65591,"done_bytes":65572,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":7,"total_bytes":65591,"done_bytes":65572,"current_path":"中文目录","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":7,"total_bytes":65591,"done_bytes":65591,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":8,"done_files":8,"total_bytes":65591,"done_bytes":65591,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":66257,"done_bytes":66257,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":8,"done_files":8,"total_bytes":65591,"done_bytes":65591,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-041/data.pbackup"}
+{"type":"result","data":{"entries":8,"files":6,"total_bytes":65591,"compression":"stored","encryption":"none","output":"tests/work/TC-041/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-041/data.pbackup --destination tests/work/TC-041/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":8,"done_files":0,"total_bytes":65591,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":1,"total_bytes":65591,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":1,"total_bytes":65591,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":2,"total_bytes":65591,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":2,"total_bytes":65591,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":3,"total_bytes":65591,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":3,"total_bytes":65591,"done_bytes":65542,"current_path":"nested","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":4,"total_bytes":65591,"done_bytes":65542,"current_path":"nested","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":4,"total_bytes":65591,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":5,"total_bytes":65591,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":5,"total_bytes":65591,"done_bytes":65554,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":6,"total_bytes":65591,"done_bytes":65572,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":6,"total_bytes":65591,"done_bytes":65572,"current_path":"中文目录","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":7,"total_bytes":65591,"done_bytes":65572,"current_path":"中文目录","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":7,"total_bytes":65591,"done_bytes":65572,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":8,"done_files":8,"total_bytes":65591,"done_bytes":65591,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":8,"done_files":8,"total_bytes":65591,"done_bytes":65591,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-041/restore"}
+{"type":"result","data":{"entries":8,"files":6,"destination":"tests/work/TC-041/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-042/data.pbackup --compression stored --encryption none --glob alpha.??? =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":6,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":6,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":107,"done_bytes":107,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":6,"done_bytes":6,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-042/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":6,"compression":"stored","encryption":"none","output":"tests/work/TC-042/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-042/data.pbackup --destination tests/work/TC-042/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":6,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":6,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":6,"done_bytes":6,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-042/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-042/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-043/data.pbackup --compression stored --encryption none --type file =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：7"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":0,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":1,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":3,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":4,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":5,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目写入完成"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":6,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":7,"done_files":7,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":66196,"done_bytes":66196,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":7,"done_files":7,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-043/data.pbackup"}
+{"type":"result","data":{"entries":7,"files":7,"total_bytes":65601,"compression":"stored","encryption":"none","output":"tests/work/TC-043/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-043/data.pbackup --destination tests/work/TC-043/restore --overwrite 1 =====
+{"type":"progress","stage":"恢复","total_files":7,"done_files":0,"total_bytes":65601,"done_bytes":0,"current_path":"alpha.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"alpha.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":1,"total_bytes":65601,"done_bytes":6,"current_path":"binary.dat","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"binary.dat","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":2,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"empty.bin","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":3,"total_bytes":65601,"done_bytes":65542,"current_path":"nested/beta.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/beta.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":4,"total_bytes":65601,"done_bytes":65554,"current_path":"nested/skip.tmp","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"nested/skip.tmp","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":5,"total_bytes":65601,"done_bytes":65564,"current_path":"report_01.docx","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"report_01.docx","message":"条目恢复完成"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":6,"total_bytes":65601,"done_bytes":65582,"current_path":"中文目录/数据.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":7,"done_files":7,"total_bytes":65601,"done_bytes":65601,"current_path":"中文目录/数据.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":7,"done_files":7,"total_bytes":65601,"done_bytes":65601,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-043/restore"}
+{"type":"result","data":{"entries":7,"files":7,"destination":"tests/work/TC-043/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/中文单文件/测试文件.txt --output tests/work/TC-044/data.pbackup --compression mszip --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"测试文件.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":22,"done_bytes":22,"current_path":"测试文件.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":22,"done_bytes":22,"current_path":"测试文件.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":170,"done_bytes":170,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":22,"done_bytes":22,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-044/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":22,"compression":"mszip","encryption":"chacha20_poly1305","output":"tests/work/TC-044/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-044/data.pbackup --destination tests/work/TC-044/restore --overwrite 1 =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":170,"done_bytes":170,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":0,"total_bytes":22,"done_bytes":0,"current_path":"测试文件.txt","message":"正在恢复"}
+{"type":"progress","stage":"恢复","total_files":1,"done_files":1,"total_bytes":22,"done_bytes":22,"current_path":"测试文件.txt","message":"条目恢复完成"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":22,"done_bytes":22,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-044/restore"}
+{"type":"result","data":{"entries":1,"files":1,"destination":"tests/work/TC-044/restore","compression":"mszip","encryption":"chacha20_poly1305"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/TC-045/missing --output tests/work/TC-045/data.pbackup --compression stored --encryption none =====
+{"type":"error","message":"备份源不存在，或不是普通文件、文件夹或符号链接。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-046/data.pbackup --compression stored --encryption aes256_gcm --kdf 100000 =====
+{"type":"error","message":"选择加密后必须填写密码。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/fixtures/standalone.txt --compression stored --encryption none =====
+{"type":"error","message":"备份包输出位置不能与备份源文件相同。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-048/data.pbackup --compression stored --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-048/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"aes256_gcm","output":"tests/work/TC-048/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe header --package tests/work/TC-048/data.pbackup =====
+{"type":"result","data":{"format":"PBACKUP-CPP3","version":3,"created_at":"2026-07-15T01:52:13Z","compression":"stored","encryption":"aes256_gcm","kdf_iterations":100000,"plain_size":142,"payload_size":162}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-049/data.pbackup --compression stored --encryption chacha20_poly1305 --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 ChaCha20-Poly1305 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-049/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"chacha20_poly1305","output":"tests/work/TC-049/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe header --package tests/work/TC-049/data.pbackup =====
+{"type":"result","data":{"format":"PBACKUP-CPP3","version":3,"created_at":"2026-07-15T01:52:13Z","compression":"stored","encryption":"chacha20_poly1305","kdf_iterations":100000,"plain_size":142,"payload_size":162}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-050/data.pbackup --compression stored --encryption aes256_gcm --kdf 100000 =====
+{"type":"log","level":"info","message":"开始由 C++ 核心读取源文件。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"standalone.txt","message":"正在扫描源文件"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：1"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"正在压缩文件"}
+{"type":"progress","stage":"写入","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目写入完成"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"加密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在使用 AES-256-GCM 加密"}
+{"type":"progress","stage":"完成","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-050/data.pbackup"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"aes256_gcm","output":"tests/work/TC-050/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe verify --package tests/work/TC-050/data.pbackup =====
+{"type":"progress","stage":"解密","total_files":0,"done_files":0,"total_bytes":142,"done_bytes":142,"current_path":"","message":"正在解密备份包"}
+{"type":"progress","stage":"校验","total_files":1,"done_files":0,"total_bytes":36,"done_bytes":0,"current_path":"standalone.txt","message":"正在校验"}
+{"type":"progress","stage":"校验","total_files":1,"done_files":1,"total_bytes":36,"done_bytes":36,"current_path":"standalone.txt","message":"条目校验完成"}
+{"type":"result","data":{"entries":1,"files":1,"total_bytes":36,"compression":"stored","encryption":"aes256_gcm","created_at":"2026-07-15T01:52:14Z"}}
+EXIT_CODE=0
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-051/data.pbackup --compression unknown --encryption none =====
+{"type":"error","message":"未知压缩方式：unknown"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-052/data.pbackup --compression stored --encryption unknown =====
+{"type":"error","message":"未知加密方式：unknown"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/standalone.txt --output tests/work/TC-053/data.pbackup --compression stored --encryption aes256_gcm --kdf 99999 =====
+{"type":"error","message":"KDF 迭代次数超出允许范围。"}
+EXIT_CODE=2
+===== pbackup_core.exe backup --source tests/work/fixtures/source-folder --output tests/work/TC-054/data.pbackup --compression stored --encryption none --include never-match-token =====
+{"type":"log","level":"info","message":"开始由 C++ 核心扫描源目录。"}
+{"type":"progress","stage":"扫描","total_files":1,"done_files":1,"total_bytes":0,"done_bytes":0,"current_path":"alpha.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":2,"done_files":2,"total_bytes":0,"done_bytes":0,"current_path":"binary.dat","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":3,"done_files":3,"total_bytes":0,"done_bytes":0,"current_path":"empty.bin","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":4,"done_files":4,"total_bytes":0,"done_bytes":0,"current_path":"nested","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":5,"done_files":5,"total_bytes":0,"done_bytes":0,"current_path":"nested/beta.txt","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":6,"done_files":6,"total_bytes":0,"done_bytes":0,"current_path":"nested/skip.tmp","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":7,"done_files":7,"total_bytes":0,"done_bytes":0,"current_path":"report_01.docx","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":8,"done_files":8,"total_bytes":0,"done_bytes":0,"current_path":"中文目录","message":"正在扫描源目录"}
+{"type":"progress","stage":"扫描","total_files":9,"done_files":9,"total_bytes":0,"done_bytes":0,"current_path":"中文目录/数据.txt","message":"正在扫描源目录"}
+{"type":"log","level":"info","message":"扫描完成，符合条件的条目数：0"}
+{"type":"log","level":"info","message":"C++ 归档负载生成完成。"}
+{"type":"progress","stage":"封装","total_files":0,"done_files":0,"total_bytes":24,"done_bytes":24,"current_path":"","message":"正在封装备份包"}
+{"type":"progress","stage":"完成","total_files":0,"done_files":0,"total_bytes":1,"done_bytes":1,"current_path":"","message":"备份完成"}
+{"type":"log","level":"ok","message":"备份包已写入：tests/work/TC-054/data.pbackup"}
+{"type":"result","data":{"entries":0,"files":0,"total_bytes":0,"compression":"stored","encryption":"none","output":"tests/work/TC-054/data.pbackup"}}
+EXIT_CODE=0
+===== pbackup_core.exe restore --package tests/work/TC-054/data.pbackup --destination tests/work/TC-054/restore --overwrite 1 =====
+{"type":"progress","stage":"完成","total_files":0,"done_files":0,"total_bytes":1,"done_bytes":1,"current_path":"","message":"恢复完成"}
+{"type":"log","level":"ok","message":"恢复完成：tests/work/TC-054/restore"}
+{"type":"result","data":{"entries":0,"files":0,"destination":"tests/work/TC-054/restore","compression":"stored","encryption":"none"}}
+EXIT_CODE=0

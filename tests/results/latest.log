@@ -1,0 +1,61 @@
+﻿文件备份软件自动化测试结果
+执行时间：2026-07-15 09:52:14
+测试总数：54
+通过：54
+失败：0
+累计用例耗时：5069 ms
+
+[通过] TC-001 后端能力查询命令 | 5 ms | 退出码为 0
+[通过] TC-002 备份格式标识 | 3 ms | 格式为 PBACKUP-CPP3
+[通过] TC-003 五种压缩能力 | 6 ms | Stored、MSZIP、XPRESS、XPRESS Huffman、LZMS 均可用
+[通过] TC-004 三种加密状态 | 1 ms | none、AES-GCM、ChaCha20-Poly1305 均可用
+[通过] TC-005 AES-256-GCM 能力 | 7 ms | AES-256-GCM（认证加密）
+[通过] TC-006 ChaCha20-Poly1305 能力 | 1 ms | ChaCha20-Poly1305（认证加密）
+[通过] TC-007 GUI 页面数量 | 2 ms | 页面数量为 3
+[通过] TC-008 GUI 删除独立校验页 | 3 ms | 独立校验页不存在
+[通过] TC-009 GUI 显示 ChaCha20 选项 | 1 ms | ChaCha20-Poly1305 已显示
+[通过] TC-010 GUI 自定义背景控件 | 1 ms | 两个背景控制按钮均存在
+[通过] TC-011 单文件组合：stored + none | 118 ms | stored + none 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-012 单文件组合：stored + aes256_gcm | 213 ms | stored + aes256_gcm 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-013 单文件组合：stored + chacha20_poly1305 | 94 ms | stored + chacha20_poly1305 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-014 单文件组合：mszip + none | 60 ms | mszip + none 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-015 单文件组合：mszip + aes256_gcm | 155 ms | mszip + aes256_gcm 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-016 单文件组合：mszip + chacha20_poly1305 | 95 ms | mszip + chacha20_poly1305 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-017 单文件组合：xpress + none | 58 ms | xpress + none 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-018 单文件组合：xpress + aes256_gcm | 207 ms | xpress + aes256_gcm 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-019 单文件组合：xpress + chacha20_poly1305 | 96 ms | xpress + chacha20_poly1305 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-020 单文件组合：xpress_huff + none | 62 ms | xpress_huff + none 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-021 单文件组合：xpress_huff + aes256_gcm | 294 ms | xpress_huff + aes256_gcm 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-022 单文件组合：xpress_huff + chacha20_poly1305 | 151 ms | xpress_huff + chacha20_poly1305 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-023 单文件组合：lzms + none | 57 ms | lzms + none 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-024 单文件组合：lzms + aes256_gcm | 304 ms | lzms + aes256_gcm 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-025 单文件组合：lzms + chacha20_poly1305 | 204 ms | lzms + chacha20_poly1305 备份、自动校验恢复及 SHA-256 比对通过
+[通过] TC-026 文件夹压缩恢复：stored | 132 ms | stored + none 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-027 文件夹压缩恢复：mszip | 227 ms | mszip + none 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-028 文件夹压缩恢复：xpress | 113 ms | xpress + none 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-029 文件夹压缩恢复：xpress_huff | 96 ms | xpress_huff + none 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-030 文件夹压缩恢复：lzms | 173 ms | lzms + none 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-031 AES-GCM 文件夹恢复 | 149 ms | mszip + aes256_gcm 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-032 ChaCha20 文件夹恢复 | 163 ms | mszip + chacha20_poly1305 文件夹恢复完成，7 个文件哈希一致
+[通过] TC-033 AES-GCM 错误密码 | 146 ms | AES-GCM 错误密码退出码=2
+[通过] TC-034 ChaCha20 错误密码 | 86 ms | ChaCha20-Poly1305 错误密码退出码=2
+[通过] TC-035 AES-GCM 损坏包拦截 | 111 ms | aes256_gcm 负载末字节篡改后恢复被拒绝
+[通过] TC-036 ChaCha20 损坏包拦截 | 182 ms | chacha20_poly1305 负载末字节篡改后恢复被拒绝
+[通过] TC-037 未加密包 SHA-256 损坏拦截 | 95 ms | none 负载末字节篡改后恢复被拒绝
+[通过] TC-038 禁止覆盖同名文件 | 66 ms | 第二次恢复被拒绝
+[通过] TC-039 允许覆盖同名文件 | 68 ms | 覆盖恢复成功
+[通过] TC-040 包含路径关键词筛选 | 136 ms | include=nested 恢复 2 个文件
+[通过] TC-041 排除路径关键词筛选 | 94 ms | exclude=skip 生效
+[通过] TC-042 文件名通配筛选 | 66 ms | alpha.??? 仅恢复 alpha.txt
+[通过] TC-043 条目类型筛选 | 184 ms | type=file 恢复 7 个普通文件
+[通过] TC-044 中文单文件路径 | 103 ms | 中文路径和中文密码恢复成功
+[通过] TC-045 不存在的备份源 | 18 ms | 不存在源被拒绝
+[通过] TC-046 加密时空密码 | 17 ms | 空密码被拒绝
+[通过] TC-047 输出与源文件相同 | 20 ms | 源与输出同路径被拒绝
+[通过] TC-048 无密码读取 AES 包头 | 65 ms | AES 包头读取成功
+[通过] TC-049 无密码读取 ChaCha20 包头 | 155 ms | ChaCha20 包头读取成功
+[通过] TC-050 后端维护校验命令 | 95 ms | verify 维护命令校验 1 个文件成功
+[通过] TC-051 非法压缩算法 | 20 ms | 非法压缩算法被拒绝
+[通过] TC-052 非法加密算法 | 21 ms | 非法加密算法被拒绝
+[通过] TC-053 KDF 迭代次数下限 | 20 ms | KDF=99999 被拒绝
+[通过] TC-054 筛选结果为空 | 50 ms | 0 条目归档创建和恢复成功
